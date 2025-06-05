@@ -1,23 +1,30 @@
-import 'package:dinetime/app/views/splash_screen.dart';
+import 'package:dinetime/app/constant/app_theme.dart';
+import 'package:dinetime/app/controllers/theme_controller.dart';
+import 'package:dinetime/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+// Controller to handle theme mode with GetX
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeController themeController = Get.put(ThemeController());
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return Obx(
+      () => GetMaterialApp(
+        title: 'Themed App with GetX',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: themeController.themeMode.value,
+        initialRoute: AppRoutes.home,
+        getPages: AppRoutes.routes,
       ),
-      home: SplashScreen(),
     );
   }
 }
