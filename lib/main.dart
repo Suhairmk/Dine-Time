@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: themeController.themeMode.value,
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.editProfile,
         getPages: AppRoutes.routes,
       ),
     );
