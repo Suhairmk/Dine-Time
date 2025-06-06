@@ -1,29 +1,38 @@
+import 'package:dinetime/app/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String hintText;
-  final IconData icon;
+  final  hintText;
+  final  prifixicon;
+   final sufixicon;
+  final label;
+  final controller;
+  final validator;
 
   const CustomTextField({
     super.key,
-    required this.hintText,
-    required this.icon,
+     this.hintText,
+     this.label, this.controller, this.validator,  this.prifixicon,  this.sufixicon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
+      validator: validator,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: const Color(0xFF7D0A0A)),
+        label: Text(label),
+        prefixIcon: Icon(prifixicon, color: AppColors.lightPrimary),
+        suffixIcon:Icon(sufixicon,  color: AppColors.lightPrimary) ,
         hintText: hintText,
         filled: true,
         fillColor: const Color(0xFFF3F3F3),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xFF7D0A0A)),
+          borderSide: const BorderSide( color: AppColors.lightPrimary),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xFF7D0A0A), width: 2),
+          borderSide: const BorderSide( color: AppColors.lightPrimary, width: 2),
           borderRadius: BorderRadius.circular(12),
         ),
       ),

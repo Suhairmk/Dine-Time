@@ -4,7 +4,10 @@ import 'package:dinetime/app/views/customeWidgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+   EditProfileScreen({super.key});
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final formkey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,44 +29,67 @@ class EditProfileScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            const CircleAvatar(
-              radius: 45,
-              backgroundColor: Colors.grey,
-              child: Icon(Icons.person, size: 50, color: Colors.white),
-            ),
-            const SizedBox(height: 40),
-            const CustomTextField(
-              hintText: 'Name',
-              icon: Icons.person_outline,
-            ),
-            const SizedBox(height: 20),
-            const CustomTextField(
-              hintText: 'something@gmail.com',
-              icon: Icons.email_outlined,
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Save profile changes
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:  AppColors.lightPrimary,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text('Save', style: TextStyle(fontSize: 16,)),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              const CircleAvatar(
+                radius: 45,
+                backgroundColor: Colors.grey,
+                child: Icon(Icons.person, size: 50, color: Colors.white),
               ),
-            ),
-          ],
+              const SizedBox(height: 40),
+               CustomTextField(
+                validator: (val){
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter your name';
+                  } else if (val.length < 3) {
+                    return 'Name must be at least 3 characters long';
+                  }
+                  return null;
+                },
+                controller:nameController ,
+                label: 'Name',
+                prifixicon: Icons.person_outline,
+              ),
+              const SizedBox(height: 20),
+               CustomTextField(
+                validator: (val){
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter your email';
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
+                label: 'Email',
+              controller: emailController,
+                prifixicon: Icons.email_outlined,
+              ),
+              const SizedBox(height: 40),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      // Form is valid, proceed with saving changes
+                    }
+                    // Save profile changes
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:  AppColors.lightPrimary,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Save', style: TextStyle(fontSize: 16,)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
