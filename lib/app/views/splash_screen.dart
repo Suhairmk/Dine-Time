@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-void main() {
-  runApp(MaterialApp(home: SplashScreen(), debugShowCheckedModeBanner: false));
-}
-
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
