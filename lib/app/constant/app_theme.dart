@@ -28,4 +28,4 @@ class AppTheme {
       bodyLarge: TextStyle(color: AppColors.darkText),
     ),
   );
-}
+}  
