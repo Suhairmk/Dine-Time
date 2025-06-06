@@ -39,6 +39,7 @@ dependencies:
   get: ^4.7.2
   google_fonts: ^6.2.1
   intl_phone_field: ^3.2.0
+  flutter_localization: ^0.3.2
 
 
 dev_dependencies:
